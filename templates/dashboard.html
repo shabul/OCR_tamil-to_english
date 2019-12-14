@@ -1,0 +1,107 @@
+<!-- templates/index.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Upload File
+</h1>
+
+<form action="" id="file-upload-form">
+    <div class="field">
+        <div class="file is-centered is-boxed is-dark has-name">
+            <label class="file-label">
+            <input id="pdf-input" class="file-input" type="file" name="tamil-pdf">
+            <span class="file-cta">
+                <span class="file-icon">
+                <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                Select file for upload
+                </span>
+            </span>
+            <span class="file-name" id="pdf-file-name">
+                No file selected
+            </span>
+            </label>
+        </div>
+    </div>
+    <div class="columns is-mobile is-centered">
+        <div class="column is-narrow">
+            <button class="button is-block is-info is-large is-fullwidth">Upload</button>
+        </div>
+    </div>
+</form>
+
+<br>
+<br>
+
+<h1 class="title">
+    Your Uploads
+</h1>
+
+<table id="uploads-table" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Upload ID</th>
+            <th>Upload Time</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody id="uploads-table-body">
+        <!-- Uploads list -->
+    </tbody>
+</table>
+
+<div id="result-modal" class="modal is-clipped">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p id="result-modal-title" class="modal-card-title">Modal title</p>
+        <button id="result-modal-close" onclick="closeModal()" class="delete" aria-label="close"></button>
+      </header>
+      <section id="result-modal-body" class="modal-card-body">
+        <div id="progress-bar-wrapper">
+          Loading. Please Wait...
+          <progress id="progress-bar" class="progress is-link" value="0" max="100">0%</progress>
+        </div>
+        <!-- Content ... -->
+        <div id="results-content" style="display: none;">
+          <h1 id="result-modal-page-no">
+            
+          </h1>
+          <br>
+          <br>
+        
+          <div class="columns">
+            <div class="column extracted-pane">
+              <div id="result-modal-extracted">
+                
+              </div>
+            </div>
+            <div class="column editable-pane">
+              <h1>Edit Text</h1>
+              <textarea id="result-modal-editable">
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <nav class="pagination" role="navigation" aria-label="pagination">
+          <a onclick="prevResultPage()" class="pagination-previous pagination-button">Previous</a>
+          <a onclick="nextResultPage()" class="pagination-next pagination-button">Next page</a>
+        </nav>
+      </footer>
+      <footer class="modal-card-foot">
+        <div class="buttons is-centered">
+          <button class="button is-success" onclick="saveChangesButton()">Save changes</button>
+          <a class="button is-info" id="download-button" href="#">Download</a>
+          <button class="button is-danger" onclick="closeModal()">Cancel</button>
+        </div>
+        
+      </footer>
+    </div>
+  </div>
+<script src="static/js/dashboard.js"></script>
+{% endblock %}
