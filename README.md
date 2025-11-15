@@ -1,4 +1,5 @@
-# Tamil OCR Service
+# Tamil OCR Service 
+`[Authored : 2019 | Published 2025]`
 
 Flask application that lets authenticated users upload Tamil PDF documents, runs OCR asynchronously through Celery/Tesseract, and lets users review, edit, and download the processed text.
 
