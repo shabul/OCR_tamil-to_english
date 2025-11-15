@@ -1,0 +1,10 @@
+Flask
+Flask-Login
+celery
+detectlanguage
+pdf2image
+Pillow
+pymodm
+pymongo
+pytesseract
+redis

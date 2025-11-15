@@ -1,21 +1,15 @@
-
-from pymongo import TEXT
-from pymongo.operations import IndexModel
-from pymodm import connect, fields, MongoModel, EmbeddedMongoModel
-from pymodm.manager import Manager
+from pymodm import connect, fields, MongoModel
 from flask_login import UserMixin
 
-from config import MONGO_URL, MONGO_DATABASE
+from .config import Config
 from bson.objectid import ObjectId
 from datetime import datetime
 
 # Connect to MongoDB first. PyMODM supports all URI options supported by
 # PyMongo. Make sure also to specify a database in the connection string:
-
-
 connect("{mongo_url}/{database}".format(**{
-    "mongo_url": MONGO_URL,
-    "database": MONGO_DATABASE
+    "mongo_url": Config.MONGO_URL,
+    "database": Config.MONGO_DATABASE
 }))
 
 class User(MongoModel, UserMixin):
@@ -31,10 +25,7 @@ class User(MongoModel, UserMixin):
             user = cls.objects.get({'_id': _id})
             return user
         except cls.DoesNotExist:
-            return {}
-
-    def is_authenticated(self):
-        return self.is_authenticated
+            return None
 
     def get_id(self):
         return self.email
@@ -43,7 +34,7 @@ class UserUpload(MongoModel):
     uploader = fields.ReferenceField(User, on_delete=fields.ReferenceField.CASCADE)
     file_ = fields.FileField()
     status = fields.CharField()
-    upload_time = fields.DateTimeField(default=datetime.now())
+    upload_time = fields.DateTimeField(default=datetime.utcnow)
     results = fields.ListField()
     done = fields.BooleanField(default=False)
     task_id = fields.CharField()
@@ -51,10 +42,11 @@ class UserUpload(MongoModel):
     @classmethod
     def get_by_id(cls, _id):
         try:
-            upload = cls.objects.get({'_id': ObjectId(_id)})
+            object_id = _id if isinstance(_id, ObjectId) else ObjectId(_id)
+            upload = cls.objects.get({'_id': object_id})
             return upload
         except cls.DoesNotExist:
-            return {}
+            return None
 
     def get_id(self):
         return self._id
