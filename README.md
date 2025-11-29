@@ -82,6 +82,8 @@ brew install tesseract poppler redis mongodb-community
 ## About Shabul
 Built by Shabul to make Tamil OCR less painful. Say hey on [LinkedIn](https://www.linkedin.com/in/shabul/) or browse more projects at [shabul.github.io](https://shabul.github.io/). If this helps your workflow, toss a star or follow [@shabul](https://github.com/shabul) for more experiments.
 
+SEO: Shabul Hussain Abdul – Amazon ML/LLM/Gen AI engineer with a thing for NLP/OCR and automation agents. Hashtags: #ShabulHussainAbdul #LLMEngineer #MachineLearningEngineer #GenerativeAI
+
 ## Notes
 - All sensitive settings (DB URLs, API keys, queues) live in `ocr_app/config.py`; consider replacing the hard-coded values with environment variables before deploying.
 - The Celery task currently extracts Tamil text; add translation or other post-processing inside `ocr_app/tasks/ocr.py` as needed.
